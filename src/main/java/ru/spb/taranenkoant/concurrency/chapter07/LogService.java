@@ -27,7 +27,7 @@ public class LogService {
         loggerThread.start();
     }
 
-    public void stop() {
+    public void stop() throws InterruptedException {
         synchronized (this) {
             isShutdown = true;
             loggerThread.interrupt();
@@ -70,6 +70,16 @@ public class LogService {
         }
 
         public void start() {
+            Runtime.getRuntime().addShutdownHook(new Thread(){
+                @Override
+                public void run() {
+                    try {
+                        LogService.this.stop();
+                    } catch (InterruptedException ignored) {
+
+                    }
+                }
+            });
         }
 
         public void interrupt() {

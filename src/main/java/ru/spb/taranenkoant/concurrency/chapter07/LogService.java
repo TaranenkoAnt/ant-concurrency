@@ -70,16 +70,13 @@ public class LogService {
         }
 
         public void start() {
-            Runtime.getRuntime().addShutdownHook(new Thread(){
-                @Override
-                public void run() {
-                    try {
-                        LogService.this.stop();
-                    } catch (InterruptedException ignored) {
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                try {
+                    LogService.this.stop();
+                } catch (InterruptedException ignored) {
 
-                    }
                 }
-            });
+            }));
         }
 
         public void interrupt() {

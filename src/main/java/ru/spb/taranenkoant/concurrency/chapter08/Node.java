@@ -12,11 +12,22 @@ public class Node<P, M> {
     final P pos;
     final M move;
     final Node<P, M> prev;
+    public Node<P, M> next;
+    public Object key;
+    public Object value;
 
     public Node(P pos, M move, Node<P, M> prev) {
         this.pos = pos;
         this.move = move;
         this.prev = prev;
+    }
+    
+
+    public Node(P pos, M move, Node<P, M> prev, Node<P, M> next) {
+        this.pos = pos;
+        this.move = move;
+        this.prev = prev;
+        this.next = next;
     }
 
     List<M> asMoveList() {
